@@ -4,18 +4,18 @@ import os
 
 def wc(file_name):
     word = 0
-    file = open(file_name, "r")
-    lines = file.readlines()
-    for line in lines:
-        words = line.split()
-        word += len(words)
+    with open(file_name, "r", encoding="utf-8") as file:
+        lines = file.readlines()
+        for line in lines:
+            words = line.split()
+            word += len(words)
     file.close()
     print(word)
     return word
 
 def lc(file_name):
-    file = open(file_name, "r")
-    lines = len(file.readlines())
+    with open(file_name, "r", encoding="utf-8") as file:
+        lines = len(file.readlines())
     file.close()
     print(lines)
     return lines
@@ -26,10 +26,10 @@ def bc(file_name):
 
 def cc(file_name):
     chars = 0
-    file = open(file_name, "r")
-    lines = file.readlines()
-    for line in lines:
-        chars += sum(len(word) for word in line)
+    with open(file_name, "r", encoding="utf-8") as file:
+        lines = file.readlines()
+        for line in lines:
+            chars += len(line) +1 # +1 for new line character not read by readlines()
     file.close()
     print(chars)
     return chars
@@ -55,10 +55,6 @@ def main():
 
         if args.file_name is None:
             print("No .txt files in current directory")
-
-        with open(path, 'r') as file:
-            var = 0
-        file.close()
         
         if args.c:
             return bc(args.file_name)
